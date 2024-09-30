@@ -1,4 +1,4 @@
-module github.com/connorsadler/go-utils/cfshttplogging
+module xxxcfshttplogging
 
 go 1.22.4
 
