@@ -1,4 +1,4 @@
-module xxxcfshttplogging
+module cfshttplogging
 
 go 1.22.4
 
