@@ -1,4 +1,4 @@
-package cfshttplogging
+package main
 
 import (
 	"fmt"
