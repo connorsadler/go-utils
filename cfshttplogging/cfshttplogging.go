@@ -14,7 +14,7 @@ type LoggingRoundTripper struct {
 	Proxied http.RoundTripper
 }
 
-const LoggingRoundTripper_Version = "v0.4"
+const LoggingRoundTripper_Version = "v0.1"
 
 func (lrt LoggingRoundTripper) RoundTrip(req *http.Request) (res *http.Response, e error) {
 	// Do "before sending requests" actions here.
