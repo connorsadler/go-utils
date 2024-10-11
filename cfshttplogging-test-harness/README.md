@@ -16,16 +16,6 @@ Drop to a command line inside the module that wishes to use cfshttplogging, and 
 go get github.com/connorsadler/go-utils/cfshttplogging
 ```
 
-___   
-**TODO: Review when we're no longer in a branch**  
-> Note:   
-> At the moment, the correct "go get" command is:
-> ```
-> go get github.com/connorsadler/go-utils/cfshttplogging@wip_10102024
-> ```
-___   
-
-
 2. Add an import like this:
 ```
 import "github.com/connorsadler/go-utils/cfshttplogging"
