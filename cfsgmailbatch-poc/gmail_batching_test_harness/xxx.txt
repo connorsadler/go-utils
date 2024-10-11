@@ -1,0 +1,8 @@
+
+--foo_bar
+Content-Type: application/http
+Content-ID: <cfs_gmail_item_1>
+
+GET /gmail/v1/users/me/messages/15a4a1151a83d7ab?alt=json&format=metadata&metadataHeaders=Subject&metadataHeaders=Date&metadataHeaders=From&prettyPrint=false
+
+--foo_bar--

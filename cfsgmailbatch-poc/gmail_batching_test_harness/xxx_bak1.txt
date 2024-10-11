@@ -1,0 +1,8 @@
+
+--batch_foobarbaz
+Content-Type: application/http
+Content-ID: <item1:12930812@barnyard.example.com>
+
+GET /users/me/messages/15a4a1151a83d7ab?alt=json&format=metadata&metadataHeaders=Subject&metadataHeaders=Date&metadataHeaders=From&prettyPrint=false
+
+--batch_foobarbaz--
