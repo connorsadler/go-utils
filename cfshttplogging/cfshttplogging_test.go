@@ -4,11 +4,13 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
+// TODO: Old dummy test - remove this
 func TestSampleFuncFromConnor(t *testing.T) {
 
 	actualResult := SampleFuncFromConnor()
@@ -16,7 +18,10 @@ func TestSampleFuncFromConnor(t *testing.T) {
 	assert.Regexp(t, "This is from cfshttplogging.go at.*", actualResult)
 }
 
-func TestInstallLoggingRoundTripper(t *testing.T) {
+// Install the logging round tripper
+// Call an external API, and check the result
+// TODO: Assert the logging calls are shown
+func TestLoggingRoundTripper(t *testing.T) {
 
 	c := http.DefaultClient
 	InstallLoggingRoundTripper(c)
@@ -33,5 +38,5 @@ func TestInstallLoggingRoundTripper(t *testing.T) {
 
 	log.Printf("Response body: %v", string(b))
 
-	assert.Equal(t, "TODO", "NOTDONEYET")
+	assert.True(t, strings.Contains(string(b), "Founders All Day IPA"))
 }

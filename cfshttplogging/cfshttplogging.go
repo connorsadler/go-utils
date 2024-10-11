@@ -16,24 +16,28 @@ type LoggingRoundTripper struct {
 
 const LoggingRoundTripper_Version = "v0.1"
 
+func logMessage(msg string) {
+	fmt.Printf("[%v LoggingRoundTripper] %v\n", LoggingRoundTripper_Version, msg)
+}
+
 func (lrt LoggingRoundTripper) RoundTrip(req *http.Request) (res *http.Response, e error) {
 	// Do "before sending requests" actions here.
-	fmt.Printf("%v LoggingRoundTripper] >>> Sending request to %v\n", LoggingRoundTripper_Version, req.URL)
+	logMessage(fmt.Sprintf(">>> Sending request to %v", req.URL))
 	// TODO: more info
-	fmt.Printf("%v LoggingRoundTripper] >>> Headers: TODO\n", LoggingRoundTripper_Version)
-	fmt.Printf("%v LoggingRoundTripper] >>> Body: %v\n", LoggingRoundTripper_Version, getRequestBody(req))
+	logMessage(fmt.Sprintf(">>> Headers: TODO"))
+	logMessage(fmt.Sprintf(">>> Body: %v", getRequestBody(req)))
 
 	// Send the request, get the response (or the error)
 	res, e = lrt.Proxied.RoundTrip(req)
 
 	// Handle the result.
 	if e != nil {
-		fmt.Printf("%v LoggingRoundTripper] <<< Error: %v\n", LoggingRoundTripper_Version, e)
+		logMessage(fmt.Sprintf("<<< Error: %v", e))
 	} else {
-		fmt.Printf("%v LoggingRoundTripper] <<< Received %v response\n", LoggingRoundTripper_Version, res.Status)
+		logMessage(fmt.Sprintf("<<< Received %v response", res.Status))
 	}
 	// TODO: more info
-	fmt.Printf("%v LoggingRoundTripper] <<< Body: %v\n", LoggingRoundTripper_Version, getResponseBody(res))
+	logMessage(fmt.Sprintf("<<< Body: %v", getResponseBody(res)))
 
 	return
 }
@@ -80,35 +84,3 @@ func InstallLoggingRoundTripper(c *http.Client) {
 	}
 	c.Transport = LoggingRoundTripper{origTransport}
 }
-
-// func main() {
-// 	fmt.Println("Start")
-
-// 	// httpClient := &http.Client{
-// 	// 	// Transport: LoggingRoundTripper{http.DefaultTransport},
-// 	// }
-// 	// httpClient.Get("https://example.com/")
-
-// 	// See link: https://stackoverflow.com/questions/39527847/is-there-middleware-for-go-http-client
-// 	// origTransport := http.DefaultClient.Transport
-// 	// if origTransport == nil {
-// 	// 	origTransport = http.DefaultTransport
-// 	// }
-// 	// http.DefaultClient.Transport = LoggingRoundTripper{origTransport}
-// 	InstallLoggingRoundTripper(http.DefaultClient)
-
-// 	// curl -v https://api.sampleapis.com/beers/ale/1 | jq
-// 	resp, err := http.Get("https://api.sampleapis.com/beers/ale/1")
-// 	if err != nil {
-// 		log.Fatalf("Error: %v", err)
-// 	}
-
-// 	b, err := io.ReadAll(resp.Body)
-// 	if err != nil {
-// 		log.Fatalln(err)
-// 	}
-
-// 	log.Printf("Response body: %v", string(b))
-
-// 	fmt.Println("Done")
-// }
