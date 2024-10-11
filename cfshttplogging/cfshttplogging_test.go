@@ -10,14 +10,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TODO: Old dummy test - remove this
-func TestSampleFuncFromConnor(t *testing.T) {
-
-	actualResult := SampleFuncFromConnor()
-
-	assert.Regexp(t, "This is from cfshttplogging.go at.*", actualResult)
-}
-
 // Install the logging round tripper
 // Call an external API, and check the result
 // TODO: Assert the logging calls are shown

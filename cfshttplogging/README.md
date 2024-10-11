@@ -36,6 +36,17 @@ Done
 ```
 
 
-
-
 Please see the "cfshttplogging-test-harness" (in this same repo) for an example of a module which depends on "cfshttplogging".
+
+
+
+### Notes
+
+1. Warning: This module will write all http request and response data to stdout, including any tokens, secrets, and PII data.  
+**You may not want this, ESPECIALLY in production.**  
+A future enhancement could be to mask out certain parts of data, or give fine grained control over which parts of the request/response to include in the logging (for example, the body text)
+
+2. The module always logs to stdout - a future enhancement could be to provide a way
+to log to a different destination, with stdout as the default.
+
+3. Outbound headers have not been done yet - see TODO marker in code
