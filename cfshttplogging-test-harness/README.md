@@ -39,3 +39,13 @@ Done
 2024/10/11 13:05:25 Response body: {"price":"$16.99","name":"Founders All Day IPA","rating":{"average":4.411243509154233,"reviews":453},"image":"https://www.totalwine.com/media/sys_master/twmmedia/h00/h94/11891416367134.png","id":1}
 ```
 
+
+### Local Development
+
+If you change the cfshttplogging code locally, use this line in the test harness go.mod:
+```
+replace github.com/connorsadler/go-utils/cfshttplogging => /XXX/go-utils/cfshttplogging
+```
+... where XXX is the full path to where you have cloned 'go-utils'
+
+Then your local test harness will use your local (new/changed) code.

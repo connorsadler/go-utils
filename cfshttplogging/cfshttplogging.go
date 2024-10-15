@@ -23,8 +23,9 @@ func logMessage(msg string) {
 func (lrt LoggingRoundTripper) RoundTrip(req *http.Request) (res *http.Response, e error) {
 	// Do "before sending requests" actions here.
 	logMessage(fmt.Sprintf(">>> Sending request to %v", req.URL))
-	// TODO: more info
-	logMessage(fmt.Sprintf(">>> Headers: TODO"))
+	// Headers
+	logMessage(fmt.Sprintf(">>> Headers: (%v)", len(req.Header)))
+	logHeaders(">>>", req.Header)
 	logMessage(fmt.Sprintf(">>> Body: %v", getRequestBody(req)))
 
 	// Send the request, get the response (or the error)
@@ -36,10 +37,18 @@ func (lrt LoggingRoundTripper) RoundTrip(req *http.Request) (res *http.Response,
 	} else {
 		logMessage(fmt.Sprintf("<<< Received %v response", res.Status))
 	}
-	// TODO: more info
+	// Response headers
+	logMessage(fmt.Sprintf("<<< Headers (%v)", len(res.Header)))
+	logHeaders("<<<", res.Header)
 	logMessage(fmt.Sprintf("<<< Body: %v", getResponseBody(res)))
 
 	return
+}
+
+func logHeaders(arrows string, header http.Header) {
+	for headerKey, headerValue := range header {
+		logMessage(fmt.Sprintf("%v   Header: %v = %v", arrows, headerKey, headerValue))
+	}
 }
 
 func getRequestBody(req *http.Request) string {

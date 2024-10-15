@@ -49,4 +49,4 @@ A future enhancement could be to mask out certain parts of data, or give fine gr
 2. The module always logs to stdout - a future enhancement could be to provide a way
 to log to a different destination, with stdout as the default.
 
-3. Outbound headers have not been done yet - see TODO marker in code
+3. Outbound headers are now logged
