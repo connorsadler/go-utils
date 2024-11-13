@@ -22,5 +22,5 @@ fi
 curl -v \
 	-X GET \
 	-H "Authorization: Bearer $GMAIL_ACCESS_TOKEN" \
-	https://gmail.googleapis.com/gmail/v1/users/me/messages/15a4a1151a83d7ab?alt=json&format=metadata&metadataHeaders=Subject&metadataHeaders=Date&metadataHeaders=From&prettyPrint=false
+	https://gmail.googleapis.com/gmail/v1/users/me/messages/xxxxxxxxxxxxd7ab?alt=json&format=metadata&metadataHeaders=Subject&metadataHeaders=Date&metadataHeaders=From&prettyPrint=false
 
