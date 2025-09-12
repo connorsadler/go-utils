@@ -7,7 +7,7 @@ echo "Making single request"
 #   1. find your gmail access token
 #   2. export GMAIL_ACCESS_TOKEN="ya29.a0_____blahblah_______"
 #   3. Run this script with:
-#          ./xxx_single.sh
+#          ./getbatch_single.sh
 #
 #
 # Gmail batching docs:

@@ -8,7 +8,7 @@ echo "Making POST"
 #   1. find your gmail access token, and ensure it's working
 #   2. export GMAIL_ACCESS_TOKEN="ya29.a0_____blahblah_______"
 #   3. Run this script with:
-#          ./xxx.sh
+#          ./getbatch.sh
 #
 # Gmail batching docs:
 #   https://developers.google.com/gmail/api/guides/batch#:~:text=The%20Gmail%20API%20supports%20batching,lot%20of%20data%20to%20upload.
@@ -25,7 +25,7 @@ fi
 curl -v \
 	--http1.1 \
 	-X POST \
-	--data-binary "@xxx.txt" \
+	--data-binary "@getbatch.txt" \
 	-H "Content-Type: multipart/mixed; boundary=\"foo_bar\"" \
 	-H "Authorization: Bearer $GMAIL_ACCESS_TOKEN" \
 	https://www.googleapis.com/batch/gmail/v1
