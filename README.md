@@ -1,4 +1,2 @@
 
-## cfshttplogging
-
-Please see the module README.md and the test harness README.md
+gmail_batching_poc - this branch has now been merged into main
