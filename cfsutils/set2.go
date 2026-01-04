@@ -4,7 +4,10 @@ package cfsutils
 
 // Set2 is a generic set based on a hash table (map).
 type Set2[T KeyProducer] struct {
+	// map of 'CalcKey' values, to determine if an item is in the set yet
 	m map[string]struct{}
+	// actual items in the set
+	itemsSlice []T
 }
 
 type KeyProducer interface {
@@ -27,7 +30,11 @@ func NewSet2With[T KeyProducer](vals ...T) *Set2[T] {
 
 // Add adds a value to the set.
 func (hs *Set2[T]) Add(val T) {
-	hs.m[val.CalcKey()] = struct{}{}
+	// Only add if not already there
+	if _, ok := hs.m[val.CalcKey()]; !ok {
+		hs.m[val.CalcKey()] = struct{}{}
+		hs.itemsSlice = append(hs.itemsSlice, val)
+	}
 }
 
 // Contains reports whether the set contains the given value.
@@ -48,14 +55,21 @@ func (hs *Set2[T]) Delete(val T) {
 }
 
 func (hs *Set2[T]) AsSlice() []T {
-	// keys := make([]T, 0, len(hs.m))
-	// for k := range hs.m {
-	// 	keys = append(keys, k)
-	// }
-	// return keys
-	// Not yet supported as we don't store the values, only the keys
-	panic("Not yet supported")
+	return hs.itemsSlice
 }
+
+func AsSliceWithCast[T KeyProducer, I any](hs *Set2[T], cast func(t T) I) []I {
+	result := make([]I, 0)
+	for _, item := range hs.itemsSlice {
+		castedItem := cast(item)
+		result = append(result, castedItem)
+	}
+	return result
+}
+
+// func (hs *Set2[T]) AsSliceWithCast(cast func(t T)) []X {
+// 	return hs.itemsSlice
+// }
 
 // Union returns the set union of hs with other. It creates a new set.
 func (hs *Set2[T]) Union(other *Set2[T]) *Set2[T] {

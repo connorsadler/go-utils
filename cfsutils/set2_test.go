@@ -49,6 +49,20 @@ func TestAllSet2(t *testing.T) {
 	// Contains
 	assert.True(t, hs.Contains([]int{1, 2}))
 	assert.False(t, hs.Contains([]int{1, 3}))
+
+	// Get items back out - gives us a []myintslice so we need to check items of that type
+	assert.Contains(t, hs.AsSlice(), myintslice([]int{1, 2}))
+	assert.Contains(t, hs.AsSlice(), myintslice([]int{2, 3}))
+	assert.NotContains(t, hs.AsSlice(), myintslice([]int{3, 4}))
+
+	// Get items back out - casting each item to []int
+	// We don't seem to be able to make this a method of Set2, which would have been nicer
+	intslice := AsSliceWithCast(hs, func(item myintslice) []int {
+		return item
+	})
+	assert.Contains(t, intslice, []int{1, 2})
+	assert.Contains(t, intslice, []int{2, 3})
+	assert.NotContains(t, intslice, []int{3, 4})
 }
 
 // func TestAll(t *testing.T) {
