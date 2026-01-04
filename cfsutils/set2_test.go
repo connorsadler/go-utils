@@ -57,9 +57,7 @@ func TestAllSet2(t *testing.T) {
 
 	// Get items back out - casting each item to []int
 	// We don't seem to be able to make this a method of Set2, which would have been nicer
-	intslice := AsSliceWithCast(hs, func(item myintslice) []int {
-		return item
-	})
+	intslice := AsSliceWithCast(hs, func(item myintslice) []int { return item })
 	assert.Contains(t, intslice, []int{1, 2})
 	assert.Contains(t, intslice, []int{2, 3})
 	assert.NotContains(t, intslice, []int{3, 4})

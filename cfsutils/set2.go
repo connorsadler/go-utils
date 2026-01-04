@@ -54,10 +54,13 @@ func (hs *Set2[T]) Delete(val T) {
 	delete(hs.m, val.CalcKey())
 }
 
+// returns a slice of the items - the type of each item is as per the Set2's type declaration
 func (hs *Set2[T]) AsSlice() []T {
 	return hs.itemsSlice
 }
 
+// returns a slice of the items - but you can cast each item to another type "I"
+// this can be useful for a NewSet2[myintslice]() where we want a slice of []int rather than myintslice - see the test
 func AsSliceWithCast[T KeyProducer, I any](hs *Set2[T], cast func(t T) I) []I {
 	result := make([]I, 0)
 	for _, item := range hs.itemsSlice {
