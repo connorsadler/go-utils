@@ -1,0 +1,96 @@
+package cfsutils
+
+// Based on this one with some mods: https://github.com/eliben/gogl/blob/main/hashset/hashset.go
+
+// Set2 is a generic set based on a hash table (map).
+type Set2[T KeyProducer] struct {
+	m map[string]struct{}
+}
+
+type KeyProducer interface {
+	CalcKey() string
+}
+
+// New creates a new Set.
+func NewSet2[T KeyProducer]() *Set2[T] {
+	return &Set2[T]{m: make(map[string]struct{})}
+}
+
+// InitWith creates a new Set initialized with vals.
+func NewSet2With[T KeyProducer](vals ...T) *Set2[T] {
+	hs := NewSet2[T]()
+	for _, v := range vals {
+		hs.Add(v)
+	}
+	return hs
+}
+
+// Add adds a value to the set.
+func (hs *Set2[T]) Add(val T) {
+	hs.m[val.CalcKey()] = struct{}{}
+}
+
+// Contains reports whether the set contains the given value.
+func (hs *Set2[T]) Contains(val T) bool {
+	_, ok := hs.m[val.CalcKey()]
+	return ok
+}
+
+// Len returns the size/length of the set - the number of values it contains.
+func (hs *Set2[T]) Len() int {
+	return len(hs.m)
+}
+
+// Delete removes a value from the set; if the value doesn't exist in the
+// set, this is a no-op.
+func (hs *Set2[T]) Delete(val T) {
+	delete(hs.m, val.CalcKey())
+}
+
+func (hs *Set2[T]) AsSlice() []T {
+	// keys := make([]T, 0, len(hs.m))
+	// for k := range hs.m {
+	// 	keys = append(keys, k)
+	// }
+	// return keys
+	// Not yet supported as we don't store the values, only the keys
+	panic("Not yet supported")
+}
+
+// Union returns the set union of hs with other. It creates a new set.
+func (hs *Set2[T]) Union(other *Set2[T]) *Set2[T] {
+	// result := New[T]()
+	// for v := range hs.m {
+	// 	result.Add(v)
+	// }
+	// for v := range other.m {
+	// 	result.Add(v)
+	// }
+	// return result
+	panic("Not yet supported")
+}
+
+// Intersection returns the set intersection of hs with other. It creates a
+// new set.
+func (hs *Set2[T]) Intersection(other *Set2[T]) *Set2[T] {
+	// result := New[T]()
+	// for v := range hs.m {
+	// 	if other.Contains(v) {
+	// 		result.Add(v)
+	// 	}
+	// }
+	// return result
+	panic("Not yet supported")
+}
+
+// Difference returns the set difference hs - other. It creates a new set.
+func (hs *Set2[T]) Difference(other *Set2[T]) *Set2[T] {
+	// result := New[T]()
+	// for v := range hs.m {
+	// 	if !other.Contains(v) {
+	// 		result.Add(v)
+	// 	}
+	// }
+	// return result
+	panic("Not yet supported")
+}
